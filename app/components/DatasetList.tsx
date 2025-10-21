@@ -19,6 +19,10 @@ export default function DatasetList() {
 
   useEffect(() => {
     load();
+    // Optional: refresh after uploads via window event bus
+    const onFocus = () => load();
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
   }, []);
 
   if (rows.length === 0) {
