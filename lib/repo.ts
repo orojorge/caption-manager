@@ -119,6 +119,7 @@ export async function updateFileCaption(fileId: string, caption: string): Promis
   });
 }
 
+// Profile
 export async function createProfile(input: Omit<Profile, 'id' | 'createdAt'>): Promise<Profile> {
   const db = await openDB();
   const profile: Profile = { id: uuidv4(), createdAt: Date.now(), ...input };
@@ -150,6 +151,23 @@ export async function deleteProfile(id: string): Promise<void> {
     const tx = db.transaction(['profiles'], 'readwrite');
     tx.objectStore('profiles').delete(id);
     tx.oncomplete = () => res();
+    tx.onerror = () => rej(tx.error);
+  });
+}
+
+export async function updateProfile(id: string, patch: Partial<Omit<Profile, 'id' | 'createdAt'>>): Promise<Profile> {
+  const db = await openDB();
+  return await new Promise((res, rej) => {
+    const tx = db.transaction(['profiles'], 'readwrite');
+    const store = tx.objectStore('profiles');
+    const get = store.get(id);
+    get.onsuccess = () => {
+      const current = get.result as Profile | undefined;
+      if (!current) { rej(new Error('Profile not found')); return; }
+      const updated: Profile = { ...current, ...patch };
+      store.put(updated);
+      tx.oncomplete = () => res(updated);
+    };
     tx.onerror = () => rej(tx.error);
   });
 }
