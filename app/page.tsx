@@ -1,17 +1,24 @@
+import Menu from './components/Menu';
 import Uploader from './components/Uploader';
-import DatasetList from './components/DatasetList';
-import Profiles from './components/Profiles';
 import TaskLauncher from './components/TaskLauncher';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-50 px-4 py-12">
-      <h1 className="text-3xl font-bold text-gray-800">Welcome to Caption Manager 👋</h1>
-      <p className="mt-2 text-gray-600">Datasets, Profiles, and mock captioning tasks.</p>
-      <Uploader />
-      <DatasetList />
-      <Profiles />
-      <TaskLauncher />
+    <main className="flex min-h-screen bg-gray-50">
+      {/* Sidebar */}
+      <Menu />
+
+      {/* Main content */}
+      <section className="flex-1 flex flex-col items-center px-8 py-12 overflow-y-auto">
+        <h1 className="text-3xl font-bold text-gray-800">Welcome to Caption Manager 👋</h1>
+        <p className="mt-2 text-gray-600">
+          Upload datasets, manage profiles, and launch captioning tasks.
+        </p>
+        <div className="mt-8 w-full max-w-3xl space-y-10">
+          <Uploader />
+          <TaskLauncher />
+        </div>
+      </section>
     </main>
   );
 }
