@@ -19,7 +19,7 @@ export default function DatasetList() {
 
   useEffect(() => {
     load();
-    // Optional: refresh after uploads via window event bus
+    // Refresh after uploads via window event bus
     const onFocus = () => load();
     window.addEventListener('focus', onFocus);
     return () => window.removeEventListener('focus', onFocus);
@@ -43,15 +43,15 @@ export default function DatasetList() {
               href={`/explorer/${r.id}`}
               className="flex items-center justify-between p-4 hover:bg-gray-50 transition"
             >
-              <div>
-                <div className="font-medium text-gray-900">{r.name}</div>
-                <div className="text-xs text-gray-500">
-                  {new Date(r.createdAt).toLocaleString()}
-                </div>
+            <div>
+              <div className="font-medium text-gray-900">{r.name}</div>
+              <div className="text-xs text-gray-500">
+                {new Date(r.createdAt).toLocaleString()}
               </div>
-              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">
-                {r.fileCount} file{r.fileCount !== 1 ? 's' : ''}
-              </span>
+            </div>
+            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">
+              {r.fileCount} file{r.fileCount !== 1 ? 's' : ''}
+            </span>
             </Link>
           </li>
         ))}

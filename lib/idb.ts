@@ -1,6 +1,5 @@
-// Simple IndexedDB helper (no deps)
 const DB_NAME = 'captionManager';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 export function openDB(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -14,6 +13,10 @@ export function openDB(): Promise<IDBDatabase> {
       if (!db.objectStoreNames.contains('files')) {
         const fs = db.createObjectStore('files', { keyPath: 'id' });
         fs.createIndex('byDataset', 'datasetId');
+      }
+      if (!db.objectStoreNames.contains('profiles')) {
+        const ps = db.createObjectStore('profiles', { keyPath: 'id' });
+        ps.createIndex('createdAt', 'createdAt');
       }
     };
     req.onsuccess = () => resolve(req.result);

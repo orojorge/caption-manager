@@ -1,5 +1,6 @@
 import Uploader from './components/Uploader';
 import DatasetList from './components/DatasetList';
+import Profiles from './components/Profiles';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <p className="mt-2 text-gray-600">Save image datasets locally with IndexedDB.</p>
       <Uploader />
       <DatasetList />
+      <Profiles />
     </main>
   );
 }
