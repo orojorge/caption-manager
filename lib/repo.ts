@@ -171,3 +171,79 @@ export async function updateProfile(id: string, patch: Partial<Omit<Profile, 'id
     tx.onerror = () => rej(tx.error);
   });
 }
+
+// Tasks
+export type TaskStatus = 'queued' | 'running' | 'done' | 'error';
+export interface Task {
+  id: string;
+  datasetId: string;
+  profileId: string;
+  model: string;
+  status: TaskStatus;
+  createdAt: number;
+  updatedAt: number;
+  error?: string;
+}
+
+export async function createTask(input: Omit<Task,'id'|'status'|'createdAt'|'updatedAt'>): Promise<Task> {
+  const db = await openDB();
+  const task: Task = {
+    id: uuidv4(),
+    status: 'queued',
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    ...input,
+  };
+  await new Promise<void>((res, rej) => {
+    const tx = db.transaction(['tasks'], 'readwrite');
+    tx.objectStore('tasks').put(task);
+    tx.oncomplete = () => res();
+    tx.onerror = () => rej(tx.error);
+  });
+  return task;
+}
+
+export async function updateTask(id: string, patch: Partial<Task>): Promise<void> {
+  const db = await openDB();
+  await new Promise<void>((res, rej) => {
+    const tx = db.transaction(['tasks'], 'readwrite');
+    const store = tx.objectStore('tasks');
+    const get = store.get(id);
+    get.onsuccess = () => {
+      const cur = get.result as Task | undefined;
+      if (!cur) { rej(new Error('Task not found')); return; }
+      store.put({ ...cur, ...patch, updatedAt: Date.now() });
+    };
+    tx.oncomplete = () => res();
+    tx.onerror = () => rej(tx.error);
+  });
+}
+
+export async function listTasks(): Promise<Task[]> {
+  const db = await openDB();
+  return await new Promise((res, rej) => {
+    const tx = db.transaction(['tasks'], 'readonly');
+    const req = tx.objectStore('tasks').getAll();
+    req.onsuccess = () => {
+      const list = (req.result as Task[]).sort((a,b)=>b.createdAt-a.createdAt);
+      res(list);
+    };
+    req.onerror = () => rej(req.error);
+  });
+}
+
+/** Mock captioning: updates file captions based on profile & model, then marks task done. */
+export async function runMockCaptioning(taskId: string, datasetId: string, profileName: string, systemPrompt: string, model: string) {
+  await updateTask(taskId, { status: 'running' });
+
+  const files = await getFilesByDataset(datasetId);
+  // naive mock "generation"
+  for (const f of files) {
+    const mock = `(${model}) ${profileName}: ${f.name.replace(/\.[^.]+$/,'')} — ${systemPrompt.slice(0,60)}…`;
+    await updateFileCaption(f.id, mock);
+    // tiny delay to simulate work
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  await updateTask(taskId, { status: 'done' });
+}

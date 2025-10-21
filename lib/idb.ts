@@ -1,5 +1,5 @@
 const DB_NAME = 'captionManager';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 export function openDB(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -17,6 +17,10 @@ export function openDB(): Promise<IDBDatabase> {
       if (!db.objectStoreNames.contains('profiles')) {
         const ps = db.createObjectStore('profiles', { keyPath: 'id' });
         ps.createIndex('createdAt', 'createdAt');
+      }
+      if (!db.objectStoreNames.contains('tasks')) {
+        const ts = db.createObjectStore('tasks', { keyPath: 'id' });
+        ts.createIndex('createdAt', 'createdAt');
       }
     };
     req.onsuccess = () => resolve(req.result);
