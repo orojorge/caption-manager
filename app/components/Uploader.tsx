@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import { addFiles, createDataset } from '@/lib/repo';
 
-export default function Uploader() {
+type UploaderProps = {
+  onComplete: () => void;
+};
+
+export default function Uploader({ onComplete }: UploaderProps) {
   const [files, setFiles] = useState<FileList | null>(null);
   const [name, setName] = useState('');
 
@@ -20,6 +24,7 @@ export default function Uploader() {
       setFiles(null);
       setName('');
       alert(`Saved "${ds.name}" with ${files.length} file(s).`);
+			onComplete();
     } catch (e) {
       console.error(e);
       alert('Failed to save. Please try again.');
