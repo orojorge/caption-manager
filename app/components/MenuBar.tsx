@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import Uploader from './Uploader';
+type MenuBarProps = {
+  onNewDataset: () => void;
+};
 
-export default function MenuBar() {
-  const [showUploader, setShowUploader] = useState(false);
-
+export default function MenuBar({ onNewDataset }: MenuBarProps) {
   return (
     <>
       <header className="flex w-full items-center justify-between bg-white px-4 py-4">
         <button
-          onClick={() => setShowUploader((prev) => !prev)}
+					onClick={onNewDataset}
           className="rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-black hover:bg-gray-200"
         >
           New Dataset
@@ -20,8 +19,6 @@ export default function MenuBar() {
           New Task
         </button>
       </header>
-
-      {showUploader && <Uploader />}
     </>
   );
 }
