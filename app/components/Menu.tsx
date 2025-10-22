@@ -2,6 +2,7 @@
 
 import DatasetList from './DatasetList';
 import Profiles from './Profiles';
+import ProfilesList from './ProfilesList';
 
 export default function Menu() {
   return (
@@ -9,7 +10,7 @@ export default function Menu() {
       <h2 className="mb-4 text-xl font-semibold text-gray-800">Sartiq.ai</h2>
       <div className="space-y-10">
         <DatasetList />
-        <Profiles />
+        <ProfilesList />
       </div>
     </aside>
   );
