@@ -2,9 +2,10 @@
 
 type MenuBarProps = {
   onNewDataset: () => void;
+  onNewTask: () => void;
 };
 
-export default function MenuBar({ onNewDataset }: MenuBarProps) {
+export default function MenuBar({ onNewDataset, onNewTask }: MenuBarProps) {
   return (
     <header className="flex w-full items-center justify-between bg-gray-50 px-4 py-4">
       <button
