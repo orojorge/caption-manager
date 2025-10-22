@@ -14,7 +14,7 @@ export default function Profiles() {
   return (
     <section className="mt-12 w-full max-w-3xl">
       <div className="mb-3 flex items-end justify-between">
-        <h2 className="text-lg font-semibold text-gray-800">Captioning Profiles</h2>
+        <h2 className="text-lg font-semibold text-gray-800">Prompts</h2>
         <Link href="/profiles" className="text-sm text-blue-600 hover:underline">All profiles →</Link>
       </div>
 

@@ -40,7 +40,7 @@ export default function DatasetList() {
         {rows.map((r) => (
           <li key={r.id}>
             <Link
-              href={`/explorer/${r.id}`}
+              href={{ pathname: `/explorer/${r.id}`, query: { name: r.name } }}
               className="flex items-center justify-between p-4 hover:bg-gray-50 transition"
             >
             <div>

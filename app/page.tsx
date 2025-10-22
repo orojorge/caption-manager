@@ -8,7 +8,7 @@ import Uploader from './components/Uploader';
 import TaskLauncher from './components/TaskLauncher';
 
 export default function Home() {
-  const [uploaderVisible, setUploaderVisible] = useState(false);
+  const [uploaderVisible, setUploaderVisible] = useState(true);
   const [taskVisible, setTaskVisible] = useState(false);
 
   return (
@@ -16,10 +16,10 @@ export default function Home() {
       <Menu />
 
       <section className="flex-1 flex flex-col items-center px-0 py-0 overflow-y-auto">
-        <MenuBar
+        {/* <MenuBar
           onNewDataset={() => setUploaderVisible(true)}
           onNewTask={() => setTaskVisible(true)}
-        />
+        /> */}
         
         <div className="mt-8 w-full max-w-3xl space-y-10">
           <DatasetList />

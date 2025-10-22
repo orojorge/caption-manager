@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
 import * as React from "react";
 import Link from 'next/link';
 import { getFilesByDataset, updateFileCaption, FileRow } from '@/lib/repo';
@@ -12,6 +13,8 @@ type Props = {
 
 export default function ExplorerPage({ params }: Props) {
 	const { datasetId } = React.use<{ datasetId: string }>(params);
+	const search = useSearchParams();
+  const datasetName = search.get('name') || 'Explorer';
 	const [files, setFiles] = useState<FileRow[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [saving, setSaving] = useState<Record<string, boolean>>({});
@@ -58,10 +61,10 @@ export default function ExplorerPage({ params }: Props) {
 			<div className="mx-auto max-w-6xl">
 				<div className="mb-6 flex items-center justify-between">
 					<div>
-						<h1 className="text-2xl font-semibold text-gray-900">Explorer</h1>
-						<p className="text-sm text-gray-600">Dataset: {datasetId}</p>
+						<h1 className="text-2xl font-semibold text-gray-900">{datasetName}</h1>
+						{/* <p className="text-sm text-gray-600">Dataset: {datasetId}</p> */}
 					</div>
-					<Link href="/" className="text-sm text-blue-600 hover:underline">← Back</Link>
+					{/* <Link href="/" className="text-sm text-blue-600 hover:underline">← Back</Link> */}
 				</div>
 
 				{loading ? (
@@ -93,7 +96,7 @@ export default function ExplorerPage({ params }: Props) {
 											disabled={!!saving[f.id]}
 											className="rounded-md bg-blue-600 px-3 py-2 text-sm text-white transition hover:bg-blue-700 disabled:opacity-60"
 											>
-													{saving[f.id] ? 'Saving…' : 'Save caption'}
+												{saving[f.id] ? 'Saving…' : 'Save caption'}
 											</button>
 										</div>
 									</div>
