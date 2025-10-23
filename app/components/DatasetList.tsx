@@ -27,35 +27,32 @@ export default function DatasetList() {
 
   if (rows.length === 0) {
     return (
-      <div className="mt-8 text-sm text-gray-600">
+      <div className="mt-0 text-sm text-gray-600">
         No datasets yet. Upload some images to get started.
       </div>
     );
   }
 
   return (
-    <div className="mt-10 w-full max-w-xl">
-      {/* <h2 className="mb-3 text-lg font-semibold text-gray-800">Datasets</h2> */}
+    <section className="mt-0 w-full max-w-xl">
       <ul className="divide-y rounded-xl border bg-white shadow-sm">
         {rows.map((r) => (
           <li key={r.id}>
             <Link
               href={{ pathname: `/explorer/${r.id}`, query: { name: r.name } }}
-              className="flex items-center justify-between p-4 hover:bg-gray-50 transition"
+              className="flex items-center justify-between p-2 hover:bg-gray-50 transition"
             >
-            <div>
-              <div className="font-medium text-gray-900">{r.name}</div>
-              <div className="text-xs text-gray-500">
-                {new Date(r.createdAt).toLocaleString()}
+              <div>
+                <div className="truncate text-sm font-medium text-gray-900">{r.name}</div>
+                <div className="text-xs text-gray-500">{new Date(r.createdAt).toLocaleString()}</div>
               </div>
-            </div>
-            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">
-              {r.fileCount} file{r.fileCount !== 1 ? 's' : ''}
-            </span>
+              {/* <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">
+                {r.fileCount} file{r.fileCount !== 1 ? 's' : ''}
+              </span> */}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
