@@ -42,7 +42,7 @@ export default function DatasetList() {
               href={{ pathname: `/explorer/${r.id}`, query: { name: r.name } }}
               className="flex items-center justify-between p-2"
             >
-              <div>
+              <div className="">
                 <div className="truncate text-sm font-medium text-gray-900">{r.name}</div>
                 <div className="text-xs text-gray-500">{new Date(r.createdAt).toLocaleString()}</div>
               </div>

@@ -60,7 +60,6 @@ export default function ProfilesPage() {
               <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
               <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles.</p>
             </div>
-            {/* <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link> */}
           </div>
 
           <div className="mb-4">
@@ -76,7 +75,7 @@ export default function ProfilesPage() {
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm mb-6">
               <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
+                  <label className="block text-sm font-medium text-gray-700">Profile name</label>
                   <input
                     value={creating.name}
                     onChange={(e) => setCreating((s) => ({ ...s, name: e.target.value }))}
@@ -94,7 +93,13 @@ export default function ProfilesPage() {
                   />
                 </div>
               </div>
-              <div className="mt-4 flex justify-end">
+              <div className="mt-4 flex justify-end gap-3">
+              <button
+                onClick={() => setShowCreate(false)}
+                className="rounded-md border border-gray-300 text-sm px-4 py-2 text-gray-700 transition hover:bg-gray-100"
+              >
+                Cancel
+              </button>
                 <button
                   disabled={busy}
                   onClick={onCreate}
@@ -125,7 +130,7 @@ export default function ProfilesPage() {
                         onChange={(e) => setDraft((s) => ({ ...s, systemPrompt: e.target.value }))}
                         className="h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
                       />
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 justify-end">
                         <button
                           disabled={busy}
                           onClick={() => saveEdit(p.id)}
