@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Profile, listProfiles, createProfile, updateProfile, deleteProfile } from '@/lib/repo';
+import Menu from '../components/Menu';
 
 export default function ProfilesPage() {
   const [items, setItems] = useState<Profile[]>([]);
@@ -45,112 +46,116 @@ export default function ProfilesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
-            <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles.</p>
-          </div>
-          <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link>
-        </div>
+    <main className="flex min-h-screen bg-gray-50">
+      <Menu />
 
-        {/* Create */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="grid gap-3 sm:grid-cols-2">
+      <section className="min-h-screen bg-gray-50 px-4 py-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6 flex items-center justify-between">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
-              <input
-                value={creating.name}
-                onChange={(e) => setCreating((s) => ({ ...s, name: e.target.value }))}
-                placeholder="e.g. Short, friendly captions"
-                className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
+              <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles.</p>
             </div>
-            <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-gray-700">System prompt</label>
-              <textarea
-                value={creating.systemPrompt}
-                onChange={(e) => setCreating((s) => ({ ...s, systemPrompt: e.target.value }))}
-                placeholder="Tone, length, structure…"
-                className="mt-1 h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link>
           </div>
-          <div className="mt-4 flex justify-end">
-            <button
-              disabled={busy}
-              onClick={onCreate}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
-            >
-              Create profile
-            </button>
-          </div>
-        </div>
 
-        {/* List */}
-        {items.length === 0 ? (
-          <div className="mt-6 text-sm text-gray-600">No profiles yet.</div>
-        ) : (
-          <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
-            {items.map((p) => (
-              <li key={p.id} className="p-4">
-                {editingId === p.id ? (
-                  <div className="space-y-3">
-                    <input
-                      value={draft.name}
-                      onChange={(e) => setDraft((s) => ({ ...s, name: e.target.value }))}
-                      className="w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <textarea
-                      value={draft.systemPrompt}
-                      onChange={(e) => setDraft((s) => ({ ...s, systemPrompt: e.target.value }))}
-                      className="h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <div className="flex gap-2">
-                      <button
-                        disabled={busy}
-                        onClick={() => saveEdit(p.id)}
-                        className="rounded-md bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={cancelEdit}
-                        className="rounded-md border px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      >
-                        Cancel
-                      </button>
+          {/* Create */}
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Name</label>
+                <input
+                  value={creating.name}
+                  onChange={(e) => setCreating((s) => ({ ...s, name: e.target.value }))}
+                  placeholder="e.g. Short, friendly captions"
+                  className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-medium text-gray-700">System prompt</label>
+                <textarea
+                  value={creating.systemPrompt}
+                  onChange={(e) => setCreating((s) => ({ ...s, systemPrompt: e.target.value }))}
+                  placeholder="Tone, length, structure…"
+                  className="mt-1 h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button
+                disabled={busy}
+                onClick={onCreate}
+                className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
+              >
+                Create profile
+              </button>
+            </div>
+          </div>
+
+          {/* List */}
+          {items.length === 0 ? (
+            <div className="mt-6 text-sm text-gray-600">No profiles yet.</div>
+          ) : (
+            <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
+              {items.map((p) => (
+                <li key={p.id} className="p-4">
+                  {editingId === p.id ? (
+                    <div className="space-y-3">
+                      <input
+                        value={draft.name}
+                        onChange={(e) => setDraft((s) => ({ ...s, name: e.target.value }))}
+                        className="w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <textarea
+                        value={draft.systemPrompt}
+                        onChange={(e) => setDraft((s) => ({ ...s, systemPrompt: e.target.value }))}
+                        className="h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          disabled={busy}
+                          onClick={() => saveEdit(p.id)}
+                          className="rounded-md bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={cancelEdit}
+                          className="rounded-md border px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <div className="truncate text-sm font-medium text-gray-900">{p.name}</div>
-                      <div className="mt-1 text-xs text-gray-600">{p.systemPrompt}</div>
-                      <div className="mt-1 text-[11px] text-gray-500">{new Date(p.createdAt).toLocaleString()}</div>
+                  ) : (
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <div className="truncate text-sm font-medium text-gray-900">{p.name}</div>
+                        <div className="mt-1 text-xs text-gray-600">{p.systemPrompt}</div>
+                        <div className="mt-1 text-[11px] text-gray-500">{new Date(p.createdAt).toLocaleString()}</div>
+                      </div>
+                      <div className="flex shrink-0 gap-2">
+                        <button
+                          onClick={() => startEdit(p)}
+                          className="rounded-md border px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => onDelete(p.id)}
+                          className="rounded-md border px-3 py-1.5 text-xs text-red-600 hover:bg-red-50"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex shrink-0 gap-2">
-                      <button
-                        onClick={() => startEdit(p)}
-                        className="rounded-md border px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => onDelete(p.id)}
-                        className="rounded-md border px-3 py-1.5 text-xs text-red-600 hover:bg-red-50"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
     </main>
   );
 }

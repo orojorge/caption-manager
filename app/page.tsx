@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import MenuBar from './components/MenuBar';
+// import MenuBar from './components/MenuBar';
 import Menu from './components/Menu';
 import DatasetList from './components/DatasetList';
 import Uploader from './components/Uploader';
