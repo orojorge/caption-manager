@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { Profile, listProfiles, createProfile, updateProfile, deleteProfile } from '@/lib/repo';
 import Menu from '../components/Menu';
+import ProfilesList from '../components/ProfilesList';
+import Profiles from '../components/ProfilesList';
 
 export default function ProfilesPage() {
   const [items, setItems] = useState<Profile[]>([]);

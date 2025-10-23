@@ -34,21 +34,21 @@ export default function DatasetList() {
   }
 
   return (
-    <section className="mt-0 w-full max-w-xl">
-      <ul className="divide-y rounded-xl border bg-white shadow-sm">
+    <section className="min-h-screen bg-gray-50 w-full">
+      <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
         {rows.map((r) => (
-          <li key={r.id}>
+          <li key={r.id} className="p-4 hover:bg-gray-50 transition">
             <Link
               href={{ pathname: `/explorer/${r.id}`, query: { name: r.name } }}
-              className="flex items-center justify-between p-2 hover:bg-gray-50 transition"
+              className="flex items-center justify-between p-2"
             >
               <div>
                 <div className="truncate text-sm font-medium text-gray-900">{r.name}</div>
                 <div className="text-xs text-gray-500">{new Date(r.createdAt).toLocaleString()}</div>
               </div>
-              {/* <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">
+              <span className="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-500">
                 {r.fileCount} file{r.fileCount !== 1 ? 's' : ''}
-              </span> */}
+              </span>
             </Link>
           </li>
         ))}
