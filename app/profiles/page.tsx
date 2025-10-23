@@ -58,7 +58,7 @@ export default function ProfilesPage() {
               <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
               <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles.</p>
             </div>
-            <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link>
+            {/* <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link> */}
           </div>
 
           <div className="mb-4">

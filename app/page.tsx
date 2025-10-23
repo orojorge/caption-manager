@@ -15,15 +15,21 @@ export default function Home() {
     <main className="flex min-h-screen bg-gray-50">
       <Menu />
 
-      <section className="flex-1 flex flex-col items-center px-0 py-0 overflow-y-auto">
-        <div className="mt-8 w-full max-w-3xl space-y-10">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-gray-900">Datasets</h1>
+      <section className="min-h-screen bg-gray-50 px-4 py-8 w-full">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6 flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold text-gray-900">Datasets</h1>
+                <p className="text-sm text-gray-600">Create and explore datasets.</p>
+              </div>
+          </div>
+
+          <div className="mb-4">
             <button
               onClick={() => setUploaderVisible((v) => !v)}
-              className="text-blue-600 hover:underline"
+              className="text-sm text-blue-600 hover:underline"
             >
-              Create New
+              {uploaderVisible ? 'Cancel' : 'Create New'}
             </button>
           </div>
 

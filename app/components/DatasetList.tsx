@@ -35,7 +35,7 @@ export default function DatasetList() {
 
   return (
     <div className="mt-10 w-full max-w-xl">
-      <h2 className="mb-3 text-lg font-semibold text-gray-800">Datasets</h2>
+      {/* <h2 className="mb-3 text-lg font-semibold text-gray-800">Datasets</h2> */}
       <ul className="divide-y rounded-xl border bg-white shadow-sm">
         {rows.map((r) => (
           <li key={r.id}>
