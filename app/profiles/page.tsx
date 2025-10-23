@@ -7,6 +7,7 @@ import Menu from '../components/Menu';
 
 export default function ProfilesPage() {
   const [items, setItems] = useState<Profile[]>([]);
+  const [showCreate, setShowCreate] = useState(false);
   const [creating, setCreating] = useState({ name: '', systemPrompt: '' });
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<{ name: string; systemPrompt: string }>({ name: '', systemPrompt: '' });
@@ -35,6 +36,7 @@ export default function ProfilesPage() {
     try {
       await createProfile({ name, systemPrompt });
       setCreating({ name: '', systemPrompt: '' });
+      setShowCreate(false);
       await load();
     } finally { setBusy(false); }
   };
@@ -49,7 +51,7 @@ export default function ProfilesPage() {
     <main className="flex min-h-screen bg-gray-50">
       <Menu />
 
-      <section className="min-h-screen bg-gray-50 px-4 py-8">
+      <section className="min-h-screen bg-gray-50 px-4 py-8 w-full">
         <div className="mx-auto max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
             <div>
@@ -59,38 +61,48 @@ export default function ProfilesPage() {
             <Link href="/" className="text-sm text-blue-600 hover:underline">← Home</Link>
           </div>
 
-          {/* Create */}
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Name</label>
-                <input
-                  value={creating.name}
-                  onChange={(e) => setCreating((s) => ({ ...s, name: e.target.value }))}
-                  placeholder="e.g. Short, friendly captions"
-                  className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700">System prompt</label>
-                <textarea
-                  value={creating.systemPrompt}
-                  onChange={(e) => setCreating((s) => ({ ...s, systemPrompt: e.target.value }))}
-                  placeholder="Tone, length, structure…"
-                  className="mt-1 h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-            <div className="mt-4 flex justify-end">
-              <button
-                disabled={busy}
-                onClick={onCreate}
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
-              >
-                Create profile
-              </button>
-            </div>
+          <div className="mb-4">
+            <button
+              onClick={() => setShowCreate((v) => !v)}
+              className="text-sm text-blue-600 hover:underline"
+            >
+              {showCreate ? 'Cancel' : 'Create New'}
+            </button>
           </div>
+
+          {showCreate && (
+            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm mb-6">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Name</label>
+                  <input
+                    value={creating.name}
+                    onChange={(e) => setCreating((s) => ({ ...s, name: e.target.value }))}
+                    placeholder="e.g. Short, friendly captions"
+                    className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700">System prompt</label>
+                  <textarea
+                    value={creating.systemPrompt}
+                    onChange={(e) => setCreating((s) => ({ ...s, systemPrompt: e.target.value }))}
+                    placeholder="Tone, length, structure…"
+                    className="mt-1 h-24 w-full resize-y rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <button
+                  disabled={busy}
+                  onClick={onCreate}
+                  className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
+                >
+                  Create profile
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* List */}
           {items.length === 0 ? (
