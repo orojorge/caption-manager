@@ -13,7 +13,7 @@ export default function Profiles() {
 
   if (items.length === 0) {
     return (
-      <div className="mt-0 text-sm text-gray-600">
+      <div className="text-sm text-gray-600">
         No profiles yet. Create your first on Profiles.
       </div>
     );

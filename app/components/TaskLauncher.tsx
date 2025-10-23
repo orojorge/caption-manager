@@ -5,12 +5,7 @@ import { listDatasets, listProfiles, createTask, runMockCaptioning, Profile, Dat
 
 const MODELS = ['OpenAI GPT-V', 'Claude', 'Gemini', 'Moondream'];
 
-type TaskLauncherProps = {
-  visible: boolean;
-  setVisible: (v: boolean) => void;
-};
-
-export default function TaskLauncher({ visible, setVisible }: TaskLauncherProps) {
+export default function TaskLauncher() {
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [datasetId, setDatasetId] = useState('');
@@ -35,15 +30,11 @@ export default function TaskLauncher({ visible, setVisible }: TaskLauncherProps)
     setStatus('running');
     await runMockCaptioning(task.id, datasetId, profile.name, profile.systemPrompt, model);
     setStatus('done');
-		alert('Task finished successfully.');
-		setVisible(false);
   };
 
-  if (!visible) return null;
-
   return (
-    <section className="mt-12 w-full max-w-3xl">
-      <h2 className="mb-3 text-lg font-semibold text-gray-800">Launch Captioning Task</h2>
+    <section className="min-h-screen bg-gray-50 w-full mt-16">
+      {/* <h2 className="mb-3 text-lg font-semibold text-gray-800">Launch Captioning Task</h2> */}
       <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="sm:col-span-1">
@@ -79,23 +70,14 @@ export default function TaskLauncher({ visible, setVisible }: TaskLauncherProps)
         </div>
 
         <div className="mt-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={launch}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
-              disabled={!datasetId || !profileId || status === 'running'}
-            >
-              {status === 'running' ? 'Running…' : 'Start task'}
-            </button>
-            <button
-              onClick={() => setVisible(false)}
-              className="rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            >
-              Cancel
-            </button>
-          </div>
-
           <StatusPill state={status} />
+          <button
+            onClick={launch}
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
+            disabled={!datasetId || !profileId || status === 'running'}
+          >
+            {status === 'running' ? 'Running…' : 'Start task'}
+          </button>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { listDatasets, listProfiles, createTask, runMockCaptioning, Profile, Dataset } from '@/lib/repo';
 import Menu from '../components/Menu';
+import TaskLauncher from '../components/TaskLauncher';
 
 const MODELS = ['OpenAI GPT-V', 'Claude', 'Gemini', 'Moondream'];
 
@@ -38,74 +39,18 @@ export default function TasksPage() {
 		<main className="flex min-h-screen bg-gray-50">
 			<Menu />
 
-			<div className="p-4">
-				<h1 className="mb-4 text-2xl font-semibold text-gray-800">Tasks</h1>
-				{/* <TaskLauncher /> */}
-				<section className="mt-12 w-full max-w-3xl">
-					<h2 className="mb-3 text-lg font-semibold text-gray-800">Launch Captioning Task</h2>
-					<div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-						<div className="grid gap-4 sm:grid-cols-3">
-							<div className="sm:col-span-1">
-								<label className="block text-sm font-medium text-gray-700">Dataset</label>
-								<select
-									value={datasetId}
-									onChange={(e) => setDatasetId(e.target.value)}
-									className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-								>
-									{datasets.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-								</select>
-							</div>
-							<div className="sm:col-span-1">
-								<label className="block text-sm font-medium text-gray-700">Profile</label>
-								<select
-									value={profileId}
-									onChange={(e) => setProfileId(e.target.value)}
-									className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-								>
-									{profiles.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-								</select>
-							</div>
-							<div className="sm:col-span-1">
-								<label className="block text-sm font-medium text-gray-700">Model</label>
-								<select
-									value={model}
-									onChange={(e) => setModel(e.target.value)}
-									className="mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-								>
-									{MODELS.map(m => <option key={m} value={m}>{m}</option>)}
-								</select>
+			<section className="min-h-screen bg-gray-50 px-4 py-8 w-full">
+				<div className="mx-auto max-w-4xl">
+						<div className="mb-6 flex items-center justify-between">
+							<div>
+								<h1 className="text-2xl font-semibold text-gray-900">Tasks Launcher</h1>
+								<p className="text-sm text-gray-600">Caption datasets with AI</p>
 							</div>
 						</div>
 
-						<div className="mt-6 flex items-center justify-between">
-							<div className="flex items-center gap-3">
-								<button
-									onClick={launch}
-									className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-60"
-									disabled={!datasetId || !profileId || status === 'running'}
-								>
-									{status === 'running' ? 'Running…' : 'Start task'}
-								</button>
-							</div>
-
-							<StatusPill state={status} />
-						</div>
-					</div>
-				</section>
-			</div>
+					<TaskLauncher />
+				</div>
+			</section>
 		</main>
   );
-}
-
-function StatusPill({ state }: { state: 'idle'|'launching'|'running'|'done' }) {
-  const label =
-    state === 'idle' ? 'Idle' :
-    state === 'launching' ? 'Queued' :
-    state === 'running' ? 'Running' : 'Done';
-  const cls =
-    state === 'done' ? 'bg-green-100 text-green-700' :
-    state === 'running' ? 'bg-amber-100 text-amber-700' :
-    state === 'launching' ? 'bg-blue-100 text-blue-700' :
-    'bg-gray-100 text-gray-700';
-  return <span className={`rounded-full px-3 py-1 text-xs ${cls}`}>{label}</span>;
 }

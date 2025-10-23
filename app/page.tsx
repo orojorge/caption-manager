@@ -20,7 +20,7 @@ export default function Home() {
           <div className="mb-6 flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-semibold text-gray-900">Datasets</h1>
-                <p className="text-sm text-gray-600">Create and explore datasets.</p>
+                <p className="text-sm text-gray-600">Create and explore datasets</p>
               </div>
           </div>
 

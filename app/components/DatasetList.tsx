@@ -27,8 +27,8 @@ export default function DatasetList() {
 
   if (rows.length === 0) {
     return (
-      <div className="mt-0 text-sm text-gray-600">
-        No datasets yet. Upload some images to get started.
+      <div className="text-sm text-gray-600">
+        No datasets yet.
       </div>
     );
   }

@@ -58,7 +58,7 @@ export default function ProfilesPage() {
           <div className="mb-6 flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
-              <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles.</p>
+              <p className="text-sm text-gray-600">Create, edit, and delete captioning profiles</p>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function ProfilesPage() {
 
           {/* List */}
           {items.length === 0 ? (
-            <div className="mt-6 text-sm text-gray-600">No profiles yet.</div>
+            <div className="text-sm text-gray-600">No profiles yet.</div>
           ) : (
             <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
               {items.map((p) => (
