@@ -16,7 +16,7 @@ export default function Home() {
       <Menu />
 
       <section className="min-h-screen bg-gray-50 px-4 py-8 w-full">
-        <div className="mx-auto max-w-4xl">
+        <div className="pl-8 max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-semibold text-gray-900">Datasets</h1>

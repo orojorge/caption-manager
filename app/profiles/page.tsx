@@ -54,7 +54,7 @@ export default function ProfilesPage() {
       <Menu />
 
       <section className="min-h-screen bg-gray-50 px-4 py-8 w-full">
-        <div className="mx-auto max-w-4xl">
+        <div className="pl-8 max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Profiles</h1>
@@ -113,7 +113,7 @@ export default function ProfilesPage() {
 
           {/* List */}
           {items.length === 0 ? (
-            <div className="text-sm text-gray-600">No profiles yet.</div>
+            <div className="text-sm text-gray-600">No profiles yet</div>
           ) : (
             <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
               {items.map((p) => (
