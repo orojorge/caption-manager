@@ -11,7 +11,13 @@ export default function Menu() {
         <Link href="/">Sartiq.ai</Link>
       </div>
       <div className="space-y-4">
+        <h2 className="mb-3 text-lg font-semibold">
+          <Link href="/">Datasets</Link>
+        </h2>
         <DatasetList />
+        <h2 className="mb-3 text-lg font-semibold">
+          <Link href="/profiles">Profiles</Link>
+        </h2>
         <ProfilesList />
         <h2 className="mb-3 text-lg font-semibold">
           <Link href="/tasks">Tasks</Link>
