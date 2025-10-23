@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-// import DatasetList from './DatasetList';
-// import ProfilesList from './ProfilesList';
 import { Dataset, listDatasets, countFilesForDataset, listProfiles, Profile } from '@/lib/repo';
 
 type Row = Dataset & { fileCount: number };
@@ -22,7 +20,6 @@ export default function Menu() {
 
   useEffect(() => {
     load();
-    // Refresh after uploads via window event bus
     const onFocus = () => load();
     window.addEventListener('focus', onFocus);
     return () => window.removeEventListener('focus', onFocus);
@@ -40,7 +37,6 @@ export default function Menu() {
           <h2 className="mb-2 text-lg font-semibold">
             <Link href="/">Datasets</Link>
           </h2>
-          {/* <DatasetList /> */}
           <div className="w-full max-w-xl">
             {rows.length === 0 ? (
               <div className="p-2 text-sm font-medium text-gray-600">
@@ -67,7 +63,6 @@ export default function Menu() {
           <h2 className="mb-2 text-lg font-semibold">
             <Link href="/profiles">Profiles</Link>
           </h2>
-          {/* <ProfilesList /> */}
           <section className="w-full max-w-xl">
             {items.length === 0 ? (
                 <div className="p-2 text-sm font-medium text-gray-600">
