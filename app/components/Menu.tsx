@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 // import DatasetList from './DatasetList';
 // import ProfilesList from './ProfilesList';
-import { Dataset, listDatasets, countFilesForDataset } from '@/lib/repo';
+import { Dataset, listDatasets, countFilesForDataset, listProfiles, Profile } from '@/lib/repo';
 
 type Row = Dataset & { fileCount: number };
 
 export default function Menu() {
   const [rows, setRows] = useState<Row[]>([]);
+  const [items, setItems] = useState<Profile[]>([]);
 
   const load = async () => {
     const ds = await listDatasets();
@@ -27,6 +28,9 @@ export default function Menu() {
     return () => window.removeEventListener('focus', onFocus);
   }, []);
 
+  const loadItems = async () => setItems(await listProfiles());
+  useEffect(() => { loadItems(); }, []);
+
   return (
     <aside className="w-full max-w-xs h-screen overflow-y-auto bg-white p-4">
       <div className="mb-10 text-xl font-semibold">Sartiq.ai</div>
@@ -37,7 +41,7 @@ export default function Menu() {
             <Link href="/">Datasets</Link>
           </h2>
           {/* <DatasetList /> */}
-          <section className="w-full max-w-xl">
+          <div className="w-full max-w-xl">
             {rows.length === 0 ? (
               <div className="p-2 text-sm font-medium text-gray-600">
                 No datasets yet. Upload some images to get started.
@@ -56,7 +60,7 @@ export default function Menu() {
                 ))}
               </ul>
             )}
-          </section>
+          </div>
         </div>
 
         <div className="">
@@ -64,6 +68,26 @@ export default function Menu() {
             <Link href="/profiles">Profiles</Link>
           </h2>
           {/* <ProfilesList /> */}
+          <section className="w-full max-w-xl">
+            {items.length === 0 ? (
+                <div className="p-2 text-sm font-medium text-gray-600">
+                  No profiles yet. Create your first on Profiles.
+                </div>
+              ) : (
+              <ul>
+                {items.map((p) => (
+                  <li key={p.id}>
+                    <Link
+                      href="/profiles"
+                      className="flex items-center justify-between p-2 hover:bg-gray-50 transition"
+                    >
+                      <div className="truncate text-sm font-medium text-gray-900">{p.name}</div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         </div>
 
         <div className="">
