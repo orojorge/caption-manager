@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import * as React from "react";
 // import Link from 'next/link';
@@ -18,6 +18,9 @@ export default function ExplorerPage({ params }: Props) {
 	const [files, setFiles] = useState<FileRow[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [saving, setSaving] = useState<Record<string, boolean>>({});
+	const [focused, setFocused] = useState(false);
+
+	const textareasRef = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
 	useEffect(() => {
 		let mounted = true;
@@ -49,17 +52,18 @@ export default function ExplorerPage({ params }: Props) {
 		setSaving((s) => ({ ...s, [id]: true }));
 		try {
 			await updateFileCaption(id, caption ?? '');
+			textareasRef.current[id]?.blur();
 		} finally {
 			setSaving((s) => ({ ...s, [id]: false }));
 		}
 	};
 
 	return (
-    <main className="flex min-h-screen bg-gray-50">
+    <main className="flex min-h-screen bg-gray-200">
       <Menu />
 
       <section className="flex-1 h-screen overflow-auto bg-gray-50 px-8 py-8">
-        <div className="max-w-6xl">
+        <div className="w-full">
 					<div className="mb-6 flex items-center justify-between">
 						<div>
 							<h1 className="text-2xl font-semibold text-gray-900">{datasetName}</h1>
@@ -71,33 +75,37 @@ export default function ExplorerPage({ params }: Props) {
 					{loading ? (
 							<div className="text-gray-600">Loading images…</div>
 						) : files.length === 0 ? (
-							<div className="rounded-lg border bg-white p-6 text-gray-600">
+							<div className="rounded-sm border bg-white p-6 text-gray-600">
 								No images found for this dataset.
 							</div>
 						) : (
-							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 								{files.map((f) => (
-									<div key={f.id} className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-										<img
-										src={previews[f.id]}
-										alt={f.name}
-										className="h-56 w-full object-cover"
-										/>
-										<div className="space-y-3 p-4">
-											<div className="text-sm font-medium text-gray-900 truncate">{f.name}</div>
-											<textarea
-													value={f.caption ?? ''}
-													onChange={(e) => onCaptionChange(f.id, e.target.value)}
-													placeholder="Write a caption…"
-													className="h-24 w-full resize-none rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+									<div key={f.id} className="overflow-hidden shadow-sm border bg-white rounded-sm h-103">
+										<div className="">
+											<img
+											src={previews[f.id]}
+											alt={f.name}
+											className="h-56 w-full object-contain"
 											/>
-											<div className="flex justify-end">
+										</div>
+										<div className="group space-y-2 p-4">
+											<div className="text-xs text-gray-500 truncate">{f.name}</div>
+											<textarea
+												ref={(el) => { textareasRef.current[f.id] = el; }}
+												value={f.caption ?? ''}
+												onChange={(e) => onCaptionChange(f.id, e.target.value)}
+												placeholder="Write a caption…"
+												className="h-24 w-full resize-none rounded-sm text-sm outline-none focus:ring-1 focus:ring-gray-300"
+											/>
+											<div className="hidden group-focus-within:flex justify-end">
 												<button
-												onClick={() => saveCaption(f.id, f.caption)}
-												disabled={!!saving[f.id]}
-												className="rounded-md bg-blue-600 px-3 py-2 text-sm text-white transition hover:bg-blue-700 disabled:opacity-60"
+													onMouseDown={(e) => e.preventDefault()}
+													onClick={() => saveCaption(f.id, f.caption)}
+													disabled={!!saving[f.id]}
+													className="rounded-sm bg-blue-600 px-3 py-1.5 text-xs text-white transition hover:bg-blue-700 disabled:opacity-60"
 												>
-													{saving[f.id] ? 'Saving…' : 'Save caption'}
+													{saving[f.id] ? 'Saving…' : 'Save'}
 												</button>
 											</div>
 										</div>
