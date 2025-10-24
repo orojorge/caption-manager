@@ -58,8 +58,8 @@ export default function ExplorerPage({ params }: Props) {
     <main className="flex min-h-screen bg-gray-50">
       <Menu />
 
-      <section className="flex-1 h-screen overflow-auto bg-gray-50 px-4 py-8">
-				<div className="pl-8 max-w-6xl">
+      <section className="flex-1 h-screen overflow-auto bg-gray-50 px-8 py-8">
+        <div className="max-w-6xl">
 					<div className="mb-6 flex items-center justify-between">
 						<div>
 							<h1 className="text-2xl font-semibold text-gray-900">{datasetName}</h1>
