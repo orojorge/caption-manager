@@ -19,7 +19,6 @@ export default function DatasetList() {
 
   useEffect(() => {
     load();
-    // Refresh after uploads via window event bus
     const onFocus = () => load();
     window.addEventListener('focus', onFocus);
     return () => window.removeEventListener('focus', onFocus);
@@ -34,7 +33,7 @@ export default function DatasetList() {
   }
 
   return (
-    <section className="min-h-screen bg-gray-50 w-full">
+    <section className="bg-gray-50 w-full">
       <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
         {rows.map((r) => (
           <li key={r.id} className="p-4 hover:bg-gray-50 transition">

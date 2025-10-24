@@ -33,7 +33,7 @@ export default function TaskLauncher() {
   };
 
   return (
-    <section className="min-h-screen bg-gray-50 w-full mt-16">
+    <section className="bg-gray-50 w-full mt-16">
       {/* <h2 className="mb-3 text-lg font-semibold text-gray-800">Launch Captioning Task</h2> */}
       <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
         <div className="grid gap-4 sm:grid-cols-3">
