@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Menu from './components/Menu';
 import DatasetList from './components/DatasetList';
-import Uploader from './components/Uploader';
 import UploaderZip from './components/UploaderZip';
 
 export default function Home() {
@@ -32,7 +31,6 @@ export default function Home() {
           </div>
 
           {uploaderVisible && (
-            // <Uploader visible={uploaderVisible} setVisible={setUploaderVisible} />
             <UploaderZip visible={uploaderVisible} setVisible={setUploaderVisible} />
           )}
 
