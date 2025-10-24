@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import Menu from './components/Menu';
 import DatasetList from './components/DatasetList';
-// import Uploader from './components/Uploader';
+import Uploader from './components/Uploader';
 import UploaderZip from './components/UploaderZip';
 
 export default function Home() {
   const [uploaderVisible, setUploaderVisible] = useState(false);
-  // const [taskVisible, setTaskVisible] = useState(false);
 
   return (
     <main className="flex min-h-screen bg-gray-50">
@@ -33,6 +32,7 @@ export default function Home() {
           </div>
 
           {uploaderVisible && (
+            // <Uploader visible={uploaderVisible} setVisible={setUploaderVisible} />
             <UploaderZip visible={uploaderVisible} setVisible={setUploaderVisible} />
           )}
 

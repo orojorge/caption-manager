@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState, useRef } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import * as React from "react";
-// import Link from 'next/link';
 import { getFilesByDataset, updateFileCaption, FileRow } from '@/lib/repo';
 import Menu from '../../components/Menu';
 
@@ -34,7 +33,6 @@ export default function ExplorerPage({ params }: Props) {
 		return () => { mounted = false; };
 	}, [datasetId]);
 
-	// Create object URLs for previews and clean them up
 	const previews = useMemo(() => {
 		const map: Record<string, string> = {};
 		files.forEach((f) => (map[f.id] = URL.createObjectURL(f.blob)));
@@ -67,7 +65,6 @@ export default function ExplorerPage({ params }: Props) {
 					<div className="mb-6 flex items-center justify-between">
 						<div>
 							<h1 className="text-2xl font-semibold text-gray-900">{datasetName}</h1>
-							{/* <p className="text-sm text-gray-600">Dataset: {datasetId}</p> */}
 							<p className="text-sm text-gray-600">Dataset</p>
 						</div>
 					</div>

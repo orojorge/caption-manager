@@ -1,11 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-// import Link from 'next/link';
 import { Profile, listProfiles, createProfile, updateProfile, deleteProfile } from '@/lib/repo';
 import Menu from '../components/Menu';
-import ProfilesList from '../components/ProfilesList';
-import Profiles from '../components/ProfilesList';
 
 export default function ProfilesPage() {
   const [items, setItems] = useState<Profile[]>([]);
@@ -71,6 +68,7 @@ export default function ProfilesPage() {
             </button>
           </div>
 
+          {/* Create New */}
           {showCreate && (
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm mb-6">
               <div className="grid gap-3 sm:grid-cols-2">
@@ -111,7 +109,7 @@ export default function ProfilesPage() {
             </div>
           )}
 
-          {/* List */}
+          {/* List of Profiles */}
           {items.length === 0 ? (
             <div className="text-sm text-gray-600">No profiles yet</div>
           ) : (
