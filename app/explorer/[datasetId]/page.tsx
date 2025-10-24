@@ -82,21 +82,21 @@ export default function ExplorerPage({ params }: Props) {
 							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 								{files.map((f) => (
 									<div key={f.id} className="overflow-hidden shadow-sm border bg-white rounded-sm h-103">
-										<div className="">
+										<div className="py-4">
 											<img
 											src={previews[f.id]}
 											alt={f.name}
 											className="h-56 w-full object-contain"
 											/>
 										</div>
-										<div className="group space-y-2 p-4">
+										<div className="group space-y-2 px-4">
 											<div className="text-xs text-gray-500 truncate">{f.name}</div>
 											<textarea
 												ref={(el) => { textareasRef.current[f.id] = el; }}
 												value={f.caption ?? ''}
 												onChange={(e) => onCaptionChange(f.id, e.target.value)}
 												placeholder="Write a caption…"
-												className="h-24 w-full resize-none rounded-sm text-sm outline-none focus:ring-1 focus:ring-gray-300"
+												className="h-20 w-full resize-none rounded-sm text-sm outline-none focus:ring-1 focus:ring-gray-300"
 											/>
 											<div className="hidden group-focus-within:flex justify-end">
 												<button

@@ -1,11 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-// import MenuBar from './components/MenuBar';
 import Menu from './components/Menu';
 import DatasetList from './components/DatasetList';
-import Uploader from './components/Uploader';
-// import TaskLauncher from './components/TaskLauncher';
+// import Uploader from './components/Uploader';
+import UploaderZip from './components/UploaderZip';
 
 export default function Home() {
   const [uploaderVisible, setUploaderVisible] = useState(false);
@@ -34,7 +33,7 @@ export default function Home() {
           </div>
 
           {uploaderVisible && (
-            <Uploader visible={uploaderVisible} setVisible={setUploaderVisible} />
+            <UploaderZip visible={uploaderVisible} setVisible={setUploaderVisible} />
           )}
 
           <DatasetList />
