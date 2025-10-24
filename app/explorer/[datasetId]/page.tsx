@@ -79,7 +79,7 @@ export default function ExplorerPage({ params }: Props) {
 								No images found for this dataset.
 							</div>
 						) : (
-							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 								{files.map((f) => (
 									<div key={f.id} className="overflow-hidden shadow-sm border bg-white rounded-sm h-103">
 										<div className="py-4">

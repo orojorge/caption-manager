@@ -29,7 +29,7 @@ export default function Menu() {
   useEffect(() => { loadItems(); }, []);
 
   return (
-    <aside className="sticky top-0 h-screen w-80 shrink-0 overflow-y-auto border-r bg-white p-4">
+    <aside className="sticky top-0 h-screen w-70 shrink-0 overflow-y-auto border-r bg-white p-4">
       <div className="mb-10 text-xl font-semibold">Sartiq.ai</div>
 
       <div className="space-y-10">
