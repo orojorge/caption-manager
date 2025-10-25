@@ -50,7 +50,7 @@ export default function ProfilesPage() {
     <main className="flex min-h-screen bg-gray-100">
       <Menu />
 
-      <section className="flex-1 h-screen overflow-auto px-8 py-8">
+      <section className="flex-1 h-screen overflow-auto px-8 py-12">
         <div className="max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
             <div>

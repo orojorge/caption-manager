@@ -61,7 +61,7 @@ export default function ExplorerPage({ params }: Props) {
     <main className="flex min-h-screen bg-gray-100">
       <Menu />
 
-      <section className="flex-1 h-screen overflow-auto px-8 py-8">
+      <section className="flex-1 h-screen overflow-auto px-8 py-12">
         <div className="w-full">
 					<div className="mb-6 flex items-center justify-between">
 						<div>

@@ -30,7 +30,7 @@ export default function Menu() {
   useEffect(() => { loadItems(); }, []);
 
   return (
-    <aside className="sticky top-0 h-screen w-70 shrink-0 overflow-y-auto bg-white p-4">
+    <aside className="sticky top-0 h-screen w-65 shrink-0 overflow-y-auto bg-white p-4">
       <div className="mb-10">
         <Image
           src="/SARTIQ_TAGLINE_100_op-dark.svg"
