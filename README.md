@@ -45,8 +45,9 @@ npm run dev
 ```
 app/
   components/
-	├── DatasetList/     # List of datasets
+    ├── DatasetList/     # List of datasets
     ├── Menu/            # Sidebar navigation
+    ├── ProductCard/     # Image + caption
     ├── TaskLauncher/    # Launch captioning jobs (mocked)
     ├── UploaderZip/     # Upload images or .zip archives
   explorer/[datasetId]/  # Image gallery with inline caption editing
