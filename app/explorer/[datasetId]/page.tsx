@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import * as React from "react";
 import { getFilesByDataset, updateFileCaption, FileRow } from '@/lib/repo';
 import Menu from '../../components/Menu';
+import ProductCard from '../../components/ProductCard';
 
 type Props = {
   params: Promise<{ datasetId: string }>;
@@ -78,35 +79,16 @@ export default function ExplorerPage({ params }: Props) {
 						) : (
 							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 								{files.map((f) => (
-									<div key={f.id} className="overflow-hidden shadow-sm bg-white rounded-sm h-103">
-										<div className="py-4">
-											<img
-											src={previews[f.id]}
-											alt={f.name}
-											className="h-56 w-full object-contain"
-											/>
-										</div>
-										<div className="group space-y-2 px-4">
-											<div className="text-xs text-gray-500 truncate">{f.name}</div>
-											<textarea
-												ref={(el) => { textareasRef.current[f.id] = el; }}
-												value={f.caption ?? ''}
-												onChange={(e) => onCaptionChange(f.id, e.target.value)}
-												placeholder="Write a caption…"
-												className="h-20 w-full resize-none rounded-sm text-sm outline-none focus:ring-1 focus:ring-gray-300"
-											/>
-											<div className="hidden group-focus-within:flex justify-end">
-												<button
-													onMouseDown={(e) => e.preventDefault()}
-													onClick={() => saveCaption(f.id, f.caption)}
-													disabled={!!saving[f.id]}
-													className="rounded-sm bg-blue-600 px-3 py-1.5 text-xs text-white transition hover:bg-blue-700 disabled:opacity-60"
-												>
-													{saving[f.id] ? 'Saving…' : 'Save'}
-												</button>
-											</div>
-										</div>
-									</div>
+									<ProductCard
+										key={f.id}
+										imgSrc={previews[f.id]}
+										name={f.name}
+										caption={f.caption}
+										onCaptionChange={(v) => onCaptionChange(f.id, v)}
+										onSave={() => saveCaption(f.id, f.caption)}
+										saving={!!saving[f.id]}
+										attachRef={(el) => { textareasRef.current[f.id] = el; }}
+									/>
 								))}
 							</div>
 						)
