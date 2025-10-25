@@ -31,7 +31,7 @@ export default function Menu() {
 
   return (
     <aside className="sticky top-0 h-screen w-65 shrink-0 overflow-y-auto bg-white p-4">
-      <div className="mb-10">
+      <div className="mb-12">
         <Image
           src="/SARTIQ_TAGLINE_100_op-dark.svg"
           alt="Sartiq.ai"
@@ -40,6 +40,7 @@ export default function Menu() {
           className="h-6 w-auto"
           priority
         />
+      <div className="mt-1">Caption Manager</div>
       </div>
 
       <div className="space-y-10">
