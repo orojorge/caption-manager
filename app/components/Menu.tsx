@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from 'react';
 import { Dataset, listDatasets, countFilesForDataset, listProfiles, Profile } from '@/lib/repo';
 
@@ -29,8 +30,17 @@ export default function Menu() {
   useEffect(() => { loadItems(); }, []);
 
   return (
-    <aside className="sticky top-0 h-screen w-70 shrink-0 overflow-y-auto border-r bg-white p-4">
-      <div className="mb-10 text-xl font-semibold">Sartiq.ai</div>
+    <aside className="sticky top-0 h-screen w-70 shrink-0 overflow-y-auto bg-white p-4">
+      <div className="mb-10">
+        <Image
+          src="/SARTIQ_TAGLINE_100_op-dark.svg"
+          alt="Sartiq.ai"
+          width={0}
+          height={0}
+          className="h-6 w-auto"
+          priority
+        />
+      </div>
 
       <div className="space-y-10">
         <div className="">
