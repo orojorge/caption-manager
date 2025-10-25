@@ -57,10 +57,10 @@ export default function ExplorerPage({ params }: Props) {
 	};
 
 	return (
-    <main className="flex min-h-screen bg-gray-200">
+    <main className="flex min-h-screen bg-gray-100">
       <Menu />
 
-      <section className="flex-1 h-screen overflow-auto bg-gray-50 px-8 py-8">
+      <section className="flex-1 h-screen overflow-auto px-8 py-8">
         <div className="w-full">
 					<div className="mb-6 flex items-center justify-between">
 						<div>
@@ -78,7 +78,7 @@ export default function ExplorerPage({ params }: Props) {
 						) : (
 							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 								{files.map((f) => (
-									<div key={f.id} className="overflow-hidden shadow-sm border bg-white rounded-sm h-103">
+									<div key={f.id} className="overflow-hidden shadow-sm bg-white rounded-sm h-103">
 										<div className="py-4">
 											<img
 											src={previews[f.id]}

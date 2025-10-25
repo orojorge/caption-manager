@@ -9,10 +9,10 @@ export default function Home() {
   const [uploaderVisible, setUploaderVisible] = useState(false);
 
   return (
-    <main className="flex min-h-screen bg-gray-50">
+    <main className="flex min-h-screen bg-gray-100">
       <Menu />
 
-      <section className="flex-1 h-screen overflow-auto bg-gray-50 px-8 py-8">
+      <section className="flex-1 h-screen overflow-auto px-8 py-8">
         <div className="max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
               <div>
