@@ -12,7 +12,11 @@ export default function ProfilesPage() {
   const [draft, setDraft] = useState<{ name: string; systemPrompt: string }>({ name: '', systemPrompt: '' });
   const [busy, setBusy] = useState(false);
 
-  const load = async () => setItems(await listProfiles());
+  const load = async () => {
+    const rows = await listProfiles();
+    setItems(rows);
+    setShowCreate(rows.length === 0);
+  };  
   useEffect(() => { load(); }, []);
 
   const startEdit = (p: Profile) => { setEditingId(p.id); setDraft({ name: p.name, systemPrompt: p.systemPrompt }); };
@@ -111,7 +115,7 @@ export default function ProfilesPage() {
 
           {/* List of Profiles */}
           {items.length === 0 ? (
-            <div className="text-sm text-gray-600">No profiles yet</div>
+            <></>
           ) : (
             <ul className="mt-6 divide-y rounded-xl border bg-white shadow-sm">
               {items.map((p) => (

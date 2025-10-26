@@ -51,7 +51,7 @@ export default function Menu() {
           <div className="w-full max-w-xl">
             {rows.length === 0 ? (
               <div className="p-2 text-sm font-medium text-gray-600">
-                No datasets yet. Upload some images to get started.
+                No datasets yet
               </div>
             ) : (
               <ul>
@@ -77,7 +77,7 @@ export default function Menu() {
           <section className="w-full max-w-xl">
             {items.length === 0 ? (
                 <div className="p-2 text-sm font-medium text-gray-600">
-                  No profiles yet. Create your first on Profiles.
+                  No profiles yet
                 </div>
               ) : (
               <ul>
