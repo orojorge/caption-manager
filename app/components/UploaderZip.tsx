@@ -38,8 +38,8 @@ async function extractZipImages(zipFile: File): Promise<File[]> {
   const out: File[] = [];
   for (const [path, data] of Object.entries(files)) {
     const e = ext(path);
-    if (!IMG_EXTS.has(e)) continue; // skip non-image entries
-    const name = path.split('/').pop() || path; // drop folders
+    if (!IMG_EXTS.has(e)) continue;
+    const name = path.split('/').pop() || path;
     const blob = new Blob([new Uint8Array(data)], { type: guessMime(name) });
     out.push(new File([blob], name, { type: blob.type }));
   }
@@ -132,9 +132,6 @@ export default function Uploader({ visible, setVisible }: UploaderProps) {
             Selected {selection.length} file{selection.length > 1 ? 's' : ''}.
           </p>
         )}
-        <p className="text-xs text-gray-500">
-          Tip: upload a single <code>.zip</code> with images inside (any folder structure is fine), or pick images directly.
-        </p>
       </div>
 
       <div className="mt-4 flex justify-end gap-3">
